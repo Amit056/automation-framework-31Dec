@@ -1,0 +1,18 @@
+{
+    "operationName": "GetLSReportData",
+    "variables": {
+        "teacherId": "userId",
+        "organizationId": "orgId",
+        "subject": "subjectM_R",
+        "isGroupSelected": true,
+        "studentIds": [ "studentIds"],
+        "lastSession": true,
+        "lastSessionDates": [],
+        "groupIds": ["groupId"],
+        "assignmentIds": ["assignmentIds " ],
+        "additionalGrouping": "NONE",
+        "lastDate": "2025-12-28T05:08:17.000Z",
+        "prevLevel": false
+    },
+    "query": "query GetLSReportData($organizationId: String!, $teacherId: String!, $isGroupSelected: Boolean, $studentIds: [String!], $limit: Float, $lastSession: Boolean, $lastSessionDates: [String!]!, $subject: Float, $groupIds: [String!], $offset: Float, $assignmentIds: [Float!], $orderBy: String, $additionalGrouping: String!, $lastDate: DateTimeISO!, $prevLevel: Boolean!) {\n  getLSReportData(\n    organizationId: $organizationId\n    id: $teacherId\n    isGroupSelected: $isGroupSelected\n    studentIds: $studentIds\n    limit: $limit\n    lastSession: $lastSession\n    lastSessionDates: $lastSessionDates\n    subject: $subject\n    groupIds: $groupIds\n    offset: $offset\n    assignmentIds: $assignmentIds\n    orderBy: $orderBy\n    lastDate: $lastDate\n    additionalGrouping: $additionalGrouping\n    prevLevel: $prevLevel\n  ) {\n    reportRun\n    lsReportResponse {\n      totalNoOfRows\n      teacherInfo {\n        id\n        title\n        firstName\n        lastName\n        userName\n        __typename\n      }\n      organizationName\n      rows {\n        districtId\n        firstName\n        middleName\n        lastName\n        userName\n        grade\n        groupName\n        groupId\n        assignmentTitle\n        personId\n        totalCorrect\n        totalAttempts\n        sessionLength\n        assignmentId\n        courseType\n        ipmStatusId\n        sessionHelpCount\n        sessionTimeouts\n        asmtCompleteStatus\n        assignmentUserId\n        sessionIpAttempts\n        sessionIpCorrect\n        exercisesPercentCorrect\n        sessionPrerequisiteAttempts\n        sessionPrerequisiteCorrect\n        prevYearLevel\n        currentCourseLevel\n        timeSpent\n        sessionStartDate\n        sessionCompleteDate\n        fluencyFlag\n        sisUserId\n        usageGoalStatus\n        isZeroState\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+}
