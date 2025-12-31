@@ -40,7 +40,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Run API Tests
-        run: mvn clean test -Dtest=AssignmentsDetailTest -Denv=${{ github.event.inputs.env || 'devSM' }}
+        run: mvn clean test -Denv=${{ github.event.inputs.env || 'devSM' }}
 
       - name: Generate Allure Report
         if: always()
