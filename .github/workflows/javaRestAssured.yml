@@ -61,15 +61,25 @@ jobs:
           # Clean branch but keep .git
           find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
 
-          cp -r target/site/allure-maven/* .
+          # Check if the directory exists before copying
+          if [ -d "target/site/allure-maven" ]; then
+              cp -r target/site/allure-maven/* .
+          else
+              echo "Directory target/site/allure-maven does not exist. Skipping file copy."
+              exit 1
+          fi
+          
           touch .nojekyll
 
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
           git add .
-          git commit -m "Update Allure report" || echo "No changes to commit"
-          git push origin gh-pages
+          if git commit -m "Update Allure report"; then
+              git push origin gh-pages
+          else
+              echo "No changes to commit"
+          fi
 
       # -----------------------------
       # Print Allure Report URL
