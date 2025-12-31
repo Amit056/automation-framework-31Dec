@@ -19,7 +19,7 @@ on:
           - devSM
 
 permissions:
-  contents: write   # required for gh-pages
+  contents: write
 
 jobs:
   api-tests:
@@ -29,15 +29,11 @@ jobs:
       AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
 
     steps:
-      # -----------------------------
-      # Checkout code
-      # -----------------------------
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true   # 🔥 REQUIRED
 
-      # -----------------------------
-      # Setup Java 21
-      # -----------------------------
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -45,16 +41,41 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # -----------------------------
-      # Build project
-      # -----------------------------
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      # -----------------------------
-      # CLEAN OLD ALLURE RESULTS (CRITICAL)
-      # -----------------------------
       - name: Clean old Allure results
         run: rm -rf target/allure-results
 
-      # ----------------------
+      - name: Run API Tests
+        run: mvn test -Denv=${{ github.event.inputs.env || 'devSM' }}
+
+      - name: Generate Allure Report
+        if: always()
+        run: mvn allure:report
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        run: |
+          mkdir -p /tmp/allure-report
+          cp -r target/site/allure-maven-plugin/* /tmp/allure-report/
+
+          git reset --hard
+          git fetch origin || true
+          git checkout gh-pages || git checkout -b gh-pages
+
+          for item in * .*; do
+            if [ "$item" != "." ] && [ "$item" != ".." ] && [ "$item" != ".git" ]; then
+              rm -rf "$item"
+            fi
+          done
+
+          cp -r /tmp/allure-report/* .
+          touch .nojekyll
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add .
+          git commit -m "Publish Allure report"
+          git push origin gh-pages
