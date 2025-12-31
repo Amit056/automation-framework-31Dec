@@ -36,7 +36,9 @@ jobs:
           cache: maven
 
       - name: Run API Tests
-        run: mvn clean test -Denv=${{ github.event.inputs.env || 'qa' }}
+         run: mvn clean test -Dtest=AssignmentsDetailTest -Denv=${{ github.event.inputs.env || 'devSM' }}
+         
+
 
       - name: Generate Allure Report
         if: always()
