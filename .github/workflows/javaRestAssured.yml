@@ -46,9 +46,31 @@ jobs:
         if: always()
         run: mvn allure:report
 
-      - name: Upload Allure Report
+      # -----------------------------
+      # Deploy Allure Report to GitHub Pages
+      # -----------------------------
+      - name: Deploy Allure Report to GitHub Pages
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: target/site/allure-maven
+        run: |
+          git fetch origin gh-pages || true
+          git checkout gh-pages || git checkout -b gh-pages
+
+          rm -rf *
+          cp -r target/site/allure-maven/* .
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add .
+          git commit -m "Update Allure report"
+          git push origin gh-pages
+
+      # -----------------------------
+      # Print Allure Report URL
+      # -----------------------------
+      - name: Print Allure Report URL
+        run: |
+          OWNER=${GITHUB_REPOSITORY%/*}
+          REPO=${GITHUB_REPOSITORY#*/}
+          echo "✅ Allure Report URL:"
+          echo "https://$OWNER.github.io/$REPO/"
