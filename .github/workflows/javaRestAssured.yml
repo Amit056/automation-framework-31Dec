@@ -26,19 +26,21 @@ jobs:
       AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 17
+          java-version: '21'
+          distribution: 'temurin'
           cache: maven
 
-      - name: Run API Tests
-         run: mvn clean test -Denv=${{ github.event.inputs.env || 'devSM' }}
-         
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
 
+      - name: Run API Tests
+        run: mvn clean test -Dtest=AssignmentsDetailTest -Denv=${{ github.event.inputs.env || 'devSM' }}
 
       - name: Generate Allure Report
         if: always()
