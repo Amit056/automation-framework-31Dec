@@ -19,7 +19,7 @@ on:
           - devSM
 
 permissions:
-  contents: write   # REQUIRED for gh-pages deployment
+  contents: write   # REQUIRED for gh-pages
 
 jobs:
   api-tests:
@@ -30,7 +30,7 @@ jobs:
 
     steps:
       # -----------------------------
-      # Checkout Source Code
+      # Checkout Code
       # -----------------------------
       - name: Checkout code
         uses: actions/checkout@v4
@@ -85,19 +85,23 @@ jobs:
       - name: Deploy Allure Report to GitHub Pages
         if: always()
         run: |
+          echo "📦 Saving Allure report before branch switch"
+          mkdir -p /tmp/allure-report
+          cp -r target/site/allure-maven-plugin/* /tmp/allure-report/
+
+          echo "🌿 Switching to gh-pages"
           git fetch origin || true
           git checkout gh-pages || git checkout -b gh-pages
 
-          # Clean gh-pages branch but keep .git
+          echo "🧹 Cleaning gh-pages branch"
           find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
 
-          # Copy Allure report (CORRECT PATH)
-          cp -r target/site/allure-maven-plugin/* .
+          echo "📂 Restoring Allure report"
+          cp -r /tmp/allure-report/* .
 
-          # Prevent Jekyll from ignoring files
+          echo "🚫 Disabling Jekyll"
           touch .nojekyll
 
-          # Commit and push
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
