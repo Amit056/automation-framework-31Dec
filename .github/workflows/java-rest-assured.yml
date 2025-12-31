@@ -16,6 +16,7 @@ on:
           - dev
           - qa
           - prod
+          - devSM
 
 jobs:
   api-tests:
