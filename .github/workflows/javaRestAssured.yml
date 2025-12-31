@@ -19,7 +19,7 @@ on:
           - devSM
 
 permissions:
-  contents: write   # ⭐ REQUIRED for gh-pages push
+  contents: write   # REQUIRED for pushing to gh-pages
 
 jobs:
   api-tests:
@@ -29,9 +29,15 @@ jobs:
       AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
 
     steps:
+      # -----------------------------
+      # Checkout Source Code
+      # -----------------------------
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # -----------------------------
+      # Setup Java 21
+      # -----------------------------
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
@@ -39,18 +45,33 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      # -----------------------------
+      # Build Project
+      # -----------------------------
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
+      # -----------------------------
+      # Run API Tests
+      # -----------------------------
       - name: Run API Tests
         run: mvn clean test -Denv=${{ github.event.inputs.env || 'devSM' }}
 
+      # -----------------------------
+      # Generate Allure Report
+      # -----------------------------
       - name: Generate Allure Report
         if: always()
         run: mvn allure:report
 
+      # -----------------------------
+      # Debug: Verify Allure Output
+      # -----------------------------
       - name: List target/site directory
-        run: ls -R target/site
+        if: always()
+        run: |
+          echo "📂 Listing target/site"
+          ls -R target/site || echo "target/site not found"
 
       # -----------------------------
       # Deploy Allure Report to GitHub Pages
@@ -61,28 +82,28 @@ jobs:
           git fetch origin || true
           git checkout gh-pages || git checkout -b gh-pages
 
-          # Clean branch but keep .git
+          # Verify Allure report exists BEFORE cleanup
+          if [ ! -d "target/site/allure-maven" ]; then
+            echo "❌ Allure report not found. Skipping deploy."
+            exit 0
+          fi
+
+          # Clean gh-pages branch but keep .git
           find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
 
-          # Check if the directory exists before copying
-          if [ -d "target/site/allure-maven" ]; then
-              cp -r target/site/allure-maven/* .
-          else
-              echo "Directory target/site/allure-maven does not exist. Skipping file copy."
-              exit 1
-          fi
-          
+          # Copy Allure report
+          cp -r target/site/allure-maven/* .
+
+          # Prevent Jekyll processing
           touch .nojekyll
 
+          # Commit and push
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
           git add .
-          if git commit -m "Update Allure report"; then
-              git push origin gh-pages
-          else
-              echo "No changes to commit"
-          fi
+          git commit -m "Update Allure report" || echo "No changes to commit"
+          git push origin gh-pages
 
       # -----------------------------
       # Print Allure Report URL
