@@ -19,7 +19,7 @@ on:
           - devSM
 
 permissions:
-  contents: write   # required for gh-pages push
+  contents: write   # required for gh-pages
 
 jobs:
   api-tests:
@@ -52,52 +52,9 @@ jobs:
         run: mvn -B package --file pom.xml
 
       # -----------------------------
-      # CLEAN ALL OLD ALLURE RESULTS
+      # CLEAN OLD ALLURE RESULTS (CRITICAL)
       # -----------------------------
       - name: Clean old Allure results
         run: rm -rf target/allure-results
 
-      # -----------------------------
-      # Run API Tests (NO mvn clean here)
-      # -----------------------------
-      - name: Run API Tests
-        run: mvn test -Denv=${{ github.event.inputs.env || 'devSM' }}
-
-      # -----------------------------
-      # Generate Allure Report
-      # -----------------------------
-      - name: Generate Allure Report
-        if: always()
-        run: mvn allure:report
-
-      # -----------------------------
-      # Verify Allure Report Exists
-      # -----------------------------
-      - name: Verify Allure Report Exists
-        if: always()
-        run: |
-          if [ ! -d "target/site/allure-maven-plugin" ]; then
-            echo "❌ Allure report NOT generated"
-            exit 1
-          fi
-          echo "✅ Allure report generated"
-
-      # -----------------------------
-      # Deploy Allure Report to GitHub Pages
-      # -----------------------------
-      - name: Deploy Allure Report to GitHub Pages
-        if: always()
-        run: |
-          echo "📦 Saving Allure report before branch switch"
-          mkdir -p /tmp/allure-report
-          cp -r target/site/allure-maven-plugin/* /tmp/allure-report/
-
-          echo "🧹 Resetting working tree"
-          git reset --hard
-
-          echo "🌿 Switching to gh-pages"
-          git fetch origin || true
-          git checkout gh-pages || git checkout -b gh-pages
-
-          echo "🧹 Removing old published reports"
-          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec
+      # ----------------------
