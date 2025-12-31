@@ -19,7 +19,7 @@ on:
           - devSM
 
 permissions:
-  contents: write   # REQUIRED for pushing to gh-pages
+  contents: write   # REQUIRED for gh-pages
 
 jobs:
   api-tests:
@@ -30,7 +30,7 @@ jobs:
 
     steps:
       # -----------------------------
-      # Checkout Source Code
+      # Checkout Code
       # -----------------------------
       - name: Checkout code
         uses: actions/checkout@v4
@@ -65,13 +65,19 @@ jobs:
         run: mvn allure:report
 
       # -----------------------------
-      # Debug: Verify Allure Output
+      # VERIFY Allure Report (IMPORTANT)
       # -----------------------------
-      - name: List target/site directory
+      - name: Verify Allure Report Exists
         if: always()
         run: |
-          echo "📂 Listing target/site"
-          ls -R target/site || echo "target/site not found"
+          echo "🔍 Checking Allure output"
+          if [ -d "target/site/allure-maven" ]; then
+            echo "✅ Allure report generated"
+            ls target/site/allure-maven
+          else
+            echo "❌ Allure report NOT generated"
+            exit 1
+          fi
 
       # -----------------------------
       # Deploy Allure Report to GitHub Pages
@@ -82,22 +88,15 @@ jobs:
           git fetch origin || true
           git checkout gh-pages || git checkout -b gh-pages
 
-          # Verify Allure report exists BEFORE cleanup
-          if [ ! -d "target/site/allure-maven" ]; then
-            echo "❌ Allure report not found. Skipping deploy."
-            exit 0
-          fi
-
-          # Clean gh-pages branch but keep .git
+          # Clean gh-pages branch (keep .git)
           find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
 
           # Copy Allure report
           cp -r target/site/allure-maven/* .
 
-          # Prevent Jekyll processing
+          # Disable Jekyll
           touch .nojekyll
 
-          # Commit and push
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
@@ -106,7 +105,7 @@ jobs:
           git push origin gh-pages
 
       # -----------------------------
-      # Print Allure Report URL
+      # Print Report URL
       # -----------------------------
       - name: Print Allure Report URL
         run: |
