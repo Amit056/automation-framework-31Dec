@@ -52,10 +52,16 @@ jobs:
         run: mvn -B package --file pom.xml
 
       # -----------------------------
+      # CLEAN OLD ALLURE RESULTS (IMPORTANT)
+      # -----------------------------
+      - name: Clean old Allure results
+        run: rm -rf target/allure-results
+
+      # -----------------------------
       # Run API Tests
       # -----------------------------
       - name: Run API Tests
-        run: mvn clean test -Denv=${{ github.event.inputs.env || 'devSM' }}
+        run: mvn test -Denv=${{ github.event.inputs.env || 'devSM' }}
 
       # -----------------------------
       # Generate Allure Report
