@@ -19,7 +19,7 @@ on:
           - devSM
 
 permissions:
-  contents: write   # REQUIRED for gh-pages
+  contents: write   # required for gh-pages push
 
 jobs:
   api-tests:
@@ -30,7 +30,7 @@ jobs:
 
     steps:
       # -----------------------------
-      # Checkout Code
+      # Checkout code
       # -----------------------------
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,19 +46,19 @@ jobs:
           cache: maven
 
       # -----------------------------
-      # Build Project
+      # Build project
       # -----------------------------
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
       # -----------------------------
-      # CLEAN OLD ALLURE RESULTS (IMPORTANT)
+      # CLEAN ALL OLD ALLURE RESULTS
       # -----------------------------
       - name: Clean old Allure results
         run: rm -rf target/allure-results
 
       # -----------------------------
-      # Run API Tests
+      # Run API Tests (NO mvn clean here)
       # -----------------------------
       - name: Run API Tests
         run: mvn test -Denv=${{ github.event.inputs.env || 'devSM' }}
@@ -76,14 +76,11 @@ jobs:
       - name: Verify Allure Report Exists
         if: always()
         run: |
-          echo "🔍 Checking Allure output"
-          if [ -d "target/site/allure-maven-plugin" ]; then
-            echo "✅ Allure report generated"
-            ls target/site/allure-maven-plugin
-          else
+          if [ ! -d "target/site/allure-maven-plugin" ]; then
             echo "❌ Allure report NOT generated"
             exit 1
           fi
+          echo "✅ Allure report generated"
 
       # -----------------------------
       # Deploy Allure Report to GitHub Pages
@@ -95,32 +92,12 @@ jobs:
           mkdir -p /tmp/allure-report
           cp -r target/site/allure-maven-plugin/* /tmp/allure-report/
 
+          echo "🧹 Resetting working tree"
+          git reset --hard
+
           echo "🌿 Switching to gh-pages"
           git fetch origin || true
           git checkout gh-pages || git checkout -b gh-pages
 
-          echo "🧹 Cleaning gh-pages branch"
-          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
-
-          echo "📂 Restoring Allure report"
-          cp -r /tmp/allure-report/* .
-
-          echo "🚫 Disabling Jekyll"
-          touch .nojekyll
-
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-
-          git add .
-          git commit -m "Update Allure report" || echo "No changes to commit"
-          git push origin gh-pages
-
-      # -----------------------------
-      # Print Allure Report URL
-      # -----------------------------
-      - name: Print Allure Report URL
-        run: |
-          OWNER=${GITHUB_REPOSITORY%/*}
-          REPO=${GITHUB_REPOSITORY#*/}
-          echo "✅ Allure Report URL:"
-          echo "https://$OWNER.github.io/$REPO/"
+          echo "🧹 Removing old published reports"
+          find . -maxdepth 1 ! -name '.git' ! -name '.' -exec
