@@ -49,6 +49,9 @@ jobs:
         if: always()
         run: mvn allure:report
 
+      - name: List target/site directory
+        run: ls -R target/site
+
       # -----------------------------
       # Deploy Allure Report to GitHub Pages
       # -----------------------------
