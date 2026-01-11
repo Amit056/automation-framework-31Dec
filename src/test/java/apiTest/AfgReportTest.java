@@ -28,7 +28,7 @@ public class AfgReportTest extends TestBase {
                         "187724", "190065", "187700", "187723", "188073", "218046", "186517", "186628", "187025",
                         "202967", "205303", "215618", "187236", "196753", "194703", "188403", "187153", "190607");
 
-        @Test
+        @Test(groups = {"smoke"})
         public void testGetAfgReport() {
                 String payload = getResponseBody(userId, orgId, subjectM_R, isGroupSelected, groupIds, studentIds,
                                 assignmentIds);

@@ -13,7 +13,7 @@ import utils.TestBase;
 
 public class GET_USAGEREPORTSTest extends TestBase {
 
-        @Test
+        @Test(groups = {"smoke"})
         public void getAssignedAssignment() {
                 HashMap<String, Object> payload = new HashMap<>();
                 payload.put("endpoint", "GET_USAGEREPORTS");

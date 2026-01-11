@@ -11,7 +11,7 @@ import utils.TestBase;
 
 public class GET_ASSIGNED_ASSIGNMENTSTest extends TestBase {
 
-        @Test
+        @Test(groups = {"smoke"})
         public void getAssignedAssignment() {
                 Map<String, Object> payload = new HashMap<>();
                 payload.put("endpoint", "GET_ASSIGNED_ASSIGNMENTS");
