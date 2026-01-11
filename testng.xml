@@ -3,11 +3,10 @@
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
     </listeners>
-    <test name="Grouped API Tests">
-        <!-- 🔥 CI/CD will inject group name here -->
+    <test name="Rest Assured Tests">
         <groups>
             <run>
-                <include name="${groups}"/>
+                <include name="${groups:-}"/>
             </run>
         </groups>
         <packages>

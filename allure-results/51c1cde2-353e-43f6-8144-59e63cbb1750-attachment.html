@@ -1,0 +1,228 @@
+<div>POST to https://sm-reports-bff-stage.smdemo.info/graphql</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;operationName&quot;: &quot;GetLSReportData&quot;,
+    &quot;variables&quot;: {
+        &quot;teacherId&quot;: &quot;ffffffff62c3041317280f0030c45057&quot;,
+        &quot;organizationId&quot;: &quot;8a72026581a3e1df0181c9c7d10400a1&quot;,
+        &quot;subject&quot;: 2,
+        &quot;isGroupSelected&quot;: true,
+        &quot;studentIds&quot;: [
+            &quot;ffffffff693a58bdca2657f427ad59c5&quot;,
+            &quot;ffffffff67f9feeb6210d132fc54bb2a&quot;,
+            &quot;ffffffff67da5d1fd847230e60b11060&quot;,
+            &quot;ffffffff67fe6b646210d132fc55727a&quot;,
+            &quot;ffffffff682eec1d56eb4d29e55fd5d9&quot;,
+            &quot;ffffffff63c195b44f47d35f7693f6f4&quot;,
+            &quot;ffffffff63c195aa4f47d35f7693f6f3&quot;,
+            &quot;ffffffff63c195c14f47d35f7693f6f5&quot;,
+            &quot;ffffffff62c698a99906826d263613e7&quot;,
+            &quot;ffffffff65e9da8457ed8e47875c4b90&quot;,
+            &quot;ffffffff62d91657f8ee4d4c98916284&quot;,
+            &quot;ffffffff62c69a0a9216a64034a905fb&quot;,
+            &quot;ffffffff62c6a86208803c4bfa8eeeef&quot;,
+            &quot;ffffffff68e4d34c2de32b5902b78524&quot;,
+            &quot;ffffffff6875f1e2c3b37714c88f675b&quot;,
+            &quot;ffffffff68d3eaa4f06e0b572826f93e&quot;,
+            &quot;ffffffff68e4d3151b8dec60e0a5595c&quot;,
+            &quot;ffffffff68c7e4185d8f6d758d3aac52&quot;,
+            &quot;ffffffff68c7e87cae303570c33e7f84&quot;,
+            &quot;ffffffff68d0e7496ec0481dfcf28cb6&quot;,
+            &quot;ffffffff6866178d02789a5b4004d4e6&quot;,
+            &quot;ffffffff693090485b26596192e5473d&quot;,
+            &quot;ffffffff6874f58002789a5b400504f9&quot;,
+            &quot;ffffffff68c2d08fc850e9538acd3766&quot;,
+            &quot;ffffffff68c2d0add6d2e611450e68ed&quot;,
+            &quot;ffffffff68d627279318455a2f5deff3&quot;,
+            &quot;ffffffff687dd692c3b37714c88f7282&quot;,
+            &quot;ffffffff687a52be8357c90cc22e92be&quot;,
+            &quot;ffffffff68c92fae6d850234ee991b1c&quot;,
+            &quot;ffffffff687a522bd9a8236280fe8307&quot;,
+            &quot;ffffffff687dc619e1e0376add7b59a3&quot;,
+            &quot;ffffffff693090796c09f50349991bfb&quot;
+        ],
+        &quot;lastSession&quot;: true,
+        &quot;lastSessionDates&quot;: [
+            
+        ],
+        &quot;groupIds&quot;: [
+            &quot;787bb240290f457cb3b5a6892cbf078a&quot;,
+            &quot;c9728f5ee2014cd9b61bd87ce61aec8a&quot;,
+            &quot;5f19ca24ccaf4961acfaf4e26ce95819&quot;,
+            &quot;1b12d846e3ba4106ac571561bb0cc5bb&quot;,
+            &quot;137f16bff0f149b3b05e3332c6087bdf&quot;,
+            &quot;0ca2e567cd2c4f7c8bdf9bf7fb7742c8&quot;,
+            &quot;a831384a8fec47068a8293599f74cbb2&quot;,
+            &quot;c20dac14715a4012ac1c44c0d9919596&quot;,
+            &quot;64477cb8850a483b8ebd031a016b0270&quot;,
+            &quot;8246e9c51d26450a9d28eb7798537b99&quot;,
+            &quot;614749d2d2fa45f486beeb56fa1fb070&quot;,
+            &quot;18b7f32cc13e4e48b1aae08ccde4b108&quot;,
+            &quot;3f314f764eda4a0ab283d881329cee3c&quot;,
+            &quot;4a066dc079cc4fd1831d357ca252d66b&quot;
+        ],
+        &quot;assignmentIds&quot;: [
+            196637,
+            187720,
+            201903,
+            199222,
+            194295,
+            194296,
+            218356,
+            190611,
+            194253,
+            196596,
+            194641,
+            187695,
+            187724,
+            190065,
+            187700,
+            187723,
+            188073,
+            218046,
+            186517,
+            186628,
+            187025,
+            202967,
+            203356,
+            205303,
+            215618,
+            187236,
+            196753,
+            188392,
+            189362,
+            194703,
+            188403,
+            187153,
+            188404,
+            190607
+        ],
+        &quot;additionalGrouping&quot;: &quot;NONE&quot;,
+        &quot;lastDate&quot;: &quot;2025-12-28T05:08:17.000Z&quot;,
+        &quot;prevLevel&quot;: false
+    },
+    &quot;query&quot;: &quot;query GetLSReportData($organizationId: String!, $teacherId: String!, $isGroupSelected: Boolean, $studentIds: [String!], $limit: Float, $lastSession: Boolean, $lastSessionDates: [String!]!, $subject: Float, $groupIds: [String!], $offset: Float, $assignmentIds: [Float!], $orderBy: String, $additionalGrouping: String!, $lastDate: DateTimeISO!, $prevLevel: Boolean!) {\n  getLSReportData(\n    organizationId: $organizationId\n    id: $teacherId\n    isGroupSelected: $isGroupSelected\n    studentIds: $studentIds\n    limit: $limit\n    lastSession: $lastSession\n    lastSessionDates: $lastSessionDates\n    subject: $subject\n    groupIds: $groupIds\n    offset: $offset\n    assignmentIds: $assignmentIds\n    orderBy: $orderBy\n    lastDate: $lastDate\n    additionalGrouping: $additionalGrouping\n    prevLevel: $prevLevel\n  ) {\n    reportRun\n    lsReportResponse {\n      totalNoOfRows\n      teacherInfo {\n        id\n        title\n        firstName\n        lastName\n        userName\n        __typename\n      }\n      organizationName\n      rows {\n        districtId\n        firstName\n        middleName\n        lastName\n        userName\n        grade\n        groupName\n        groupId\n        assignmentTitle\n        personId\n        totalCorrect\n        totalAttempts\n        sessionLength\n        assignmentId\n        courseType\n        ipmStatusId\n        sessionHelpCount\n        sessionTimeouts\n        asmtCompleteStatus\n        assignmentUserId\n        sessionIpAttempts\n        sessionIpCorrect\n        exercisesPercentCorrect\n        sessionPrerequisiteAttempts\n        sessionPrerequisiteCorrect\n        prevYearLevel\n        currentCourseLevel\n        timeSpent\n        sessionStartDate\n        sessionCompleteDate\n        fluencyFlag\n        sisUserId\n        usageGoalStatus\n        isZeroState\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n&quot;
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: Bearer rNlOqGxgn1RVphwuFCJbzNv3Ts6hTT5r5jfrzTcGvS6iSmxNFqQs4jiwPbMUzXsgOgkBqFqH3oPRD5GI7Dfh2Jlvs4GlYeFlQlzLiCcmy8bMbDbTRq7nuE3lIGYPLrXBudPUfvMGby9EYlr4p1seOHW7gAFlCd16WpUdm6ox3nc9pM82m90vcNpJRWKQlfn9NZA513V64Q851D0MJKn5sKMKytYtCfKmI3J8yL8XxAIxPRuxpoH4kXJHTMrVgZ</div>
+            <div>org-id: 8a72026581a3e1df0181c9c7d10400a1</div>
+            <div>Accept: */*</div>
+            <div>user-id: ffffffff62c3041317280f0030c45057</div>
+            <div>Content-Type: application/json</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;https://sm-reports-bff-stage.smdemo.info/graphql&#39; -H &#39;Authorization: Bearer rNlOqGxgn1RVphwuFCJbzNv3Ts6hTT5r5jfrzTcGvS6iSmxNFqQs4jiwPbMUzXsgOgkBqFqH3oPRD5GI7Dfh2Jlvs4GlYeFlQlzLiCcmy8bMbDbTRq7nuE3lIGYPLrXBudPUfvMGby9EYlr4p1seOHW7gAFlCd16WpUdm6ox3nc9pM82m90vcNpJRWKQlfn9NZA513V64Q851D0MJKn5sKMKytYtCfKmI3J8yL8XxAIxPRuxpoH4kXJHTMrVgZ&#39; -H &#39;org-id: 8a72026581a3e1df0181c9c7d10400a1&#39; -H &#39;Accept: */*&#39; -H &#39;user-id: ffffffff62c3041317280f0030c45057&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;operationName&quot;: &quot;GetLSReportData&quot;,
+    &quot;variables&quot;: {
+        &quot;teacherId&quot;: &quot;ffffffff62c3041317280f0030c45057&quot;,
+        &quot;organizationId&quot;: &quot;8a72026581a3e1df0181c9c7d10400a1&quot;,
+        &quot;subject&quot;: 2,
+        &quot;isGroupSelected&quot;: true,
+        &quot;studentIds&quot;: [
+            &quot;ffffffff693a58bdca2657f427ad59c5&quot;,
+            &quot;ffffffff67f9feeb6210d132fc54bb2a&quot;,
+            &quot;ffffffff67da5d1fd847230e60b11060&quot;,
+            &quot;ffffffff67fe6b646210d132fc55727a&quot;,
+            &quot;ffffffff682eec1d56eb4d29e55fd5d9&quot;,
+            &quot;ffffffff63c195b44f47d35f7693f6f4&quot;,
+            &quot;ffffffff63c195aa4f47d35f7693f6f3&quot;,
+            &quot;ffffffff63c195c14f47d35f7693f6f5&quot;,
+            &quot;ffffffff62c698a99906826d263613e7&quot;,
+            &quot;ffffffff65e9da8457ed8e47875c4b90&quot;,
+            &quot;ffffffff62d91657f8ee4d4c98916284&quot;,
+            &quot;ffffffff62c69a0a9216a64034a905fb&quot;,
+            &quot;ffffffff62c6a86208803c4bfa8eeeef&quot;,
+            &quot;ffffffff68e4d34c2de32b5902b78524&quot;,
+            &quot;ffffffff6875f1e2c3b37714c88f675b&quot;,
+            &quot;ffffffff68d3eaa4f06e0b572826f93e&quot;,
+            &quot;ffffffff68e4d3151b8dec60e0a5595c&quot;,
+            &quot;ffffffff68c7e4185d8f6d758d3aac52&quot;,
+            &quot;ffffffff68c7e87cae303570c33e7f84&quot;,
+            &quot;ffffffff68d0e7496ec0481dfcf28cb6&quot;,
+            &quot;ffffffff6866178d02789a5b4004d4e6&quot;,
+            &quot;ffffffff693090485b26596192e5473d&quot;,
+            &quot;ffffffff6874f58002789a5b400504f9&quot;,
+            &quot;ffffffff68c2d08fc850e9538acd3766&quot;,
+            &quot;ffffffff68c2d0add6d2e611450e68ed&quot;,
+            &quot;ffffffff68d627279318455a2f5deff3&quot;,
+            &quot;ffffffff687dd692c3b37714c88f7282&quot;,
+            &quot;ffffffff687a52be8357c90cc22e92be&quot;,
+            &quot;ffffffff68c92fae6d850234ee991b1c&quot;,
+            &quot;ffffffff687a522bd9a8236280fe8307&quot;,
+            &quot;ffffffff687dc619e1e0376add7b59a3&quot;,
+            &quot;ffffffff693090796c09f50349991bfb&quot;
+        ],
+        &quot;lastSession&quot;: true,
+        &quot;lastSessionDates&quot;: [
+            
+        ],
+        &quot;groupIds&quot;: [
+            &quot;787bb240290f457cb3b5a6892cbf078a&quot;,
+            &quot;c9728f5ee2014cd9b61bd87ce61aec8a&quot;,
+            &quot;5f19ca24ccaf4961acfaf4e26ce95819&quot;,
+            &quot;1b12d846e3ba4106ac571561bb0cc5bb&quot;,
+            &quot;137f16bff0f149b3b05e3332c6087bdf&quot;,
+            &quot;0ca2e567cd2c4f7c8bdf9bf7fb7742c8&quot;,
+            &quot;a831384a8fec47068a8293599f74cbb2&quot;,
+            &quot;c20dac14715a4012ac1c44c0d9919596&quot;,
+            &quot;64477cb8850a483b8ebd031a016b0270&quot;,
+            &quot;8246e9c51d26450a9d28eb7798537b99&quot;,
+            &quot;614749d2d2fa45f486beeb56fa1fb070&quot;,
+            &quot;18b7f32cc13e4e48b1aae08ccde4b108&quot;,
+            &quot;3f314f764eda4a0ab283d881329cee3c&quot;,
+            &quot;4a066dc079cc4fd1831d357ca252d66b&quot;
+        ],
+        &quot;assignmentIds&quot;: [
+            196637,
+            187720,
+            201903,
+            199222,
+            194295,
+            194296,
+            218356,
+            190611,
+            194253,
+            196596,
+            194641,
+            187695,
+            187724,
+            190065,
+            187700,
+            187723,
+            188073,
+            218046,
+            186517,
+            186628,
+            187025,
+            202967,
+            203356,
+            205303,
+            215618,
+            187236,
+            196753,
+            188392,
+            189362,
+            194703,
+            188403,
+            187153,
+            188404,
+            190607
+        ],
+        &quot;additionalGrouping&quot;: &quot;NONE&quot;,
+        &quot;lastDate&quot;: &quot;2025-12-28T05:08:17.000Z&quot;,
+        &quot;prevLevel&quot;: false
+    },
+    &quot;query&quot;: &quot;query GetLSReportData($organizationId: String!, $teacherId: String!, $isGroupSelected: Boolean, $studentIds: [String!], $limit: Float, $lastSession: Boolean, $lastSessionDates: [String!]!, $subject: Float, $groupIds: [String!], $offset: Float, $assignmentIds: [Float!], $orderBy: String, $additionalGrouping: String!, $lastDate: DateTimeISO!, $prevLevel: Boolean!) {\n  getLSReportData(\n    organizationId: $organizationId\n    id: $teacherId\n    isGroupSelected: $isGroupSelected\n    studentIds: $studentIds\n    limit: $limit\n    lastSession: $lastSession\n    lastSessionDates: $lastSessionDates\n    subject: $subject\n    groupIds: $groupIds\n    offset: $offset\n    assignmentIds: $assignmentIds\n    orderBy: $orderBy\n    lastDate: $lastDate\n    additionalGrouping: $additionalGrouping\n    prevLevel: $prevLevel\n  ) {\n    reportRun\n    lsReportResponse {\n      totalNoOfRows\n      teacherInfo {\n        id\n        title\n        firstName\n        lastName\n        userName\n        __typename\n      }\n      organizationName\n      rows {\n        districtId\n        firstName\n        middleName\n        lastName\n        userName\n        grade\n        groupName\n        groupId\n        assignmentTitle\n        personId\n        totalCorrect\n        totalAttempts\n        sessionLength\n        assignmentId\n        courseType\n        ipmStatusId\n        sessionHelpCount\n        sessionTimeouts\n        asmtCompleteStatus\n        assignmentUserId\n        sessionIpAttempts\n        sessionIpCorrect\n        exercisesPercentCorrect\n        sessionPrerequisiteAttempts\n        sessionPrerequisiteCorrect\n        prevYearLevel\n        currentCourseLevel\n        timeSpent\n        sessionStartDate\n        sessionCompleteDate\n        fluencyFlag\n        sisUserId\n        usageGoalStatus\n        isZeroState\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n&quot;
+}&#39;
+    </div>
+

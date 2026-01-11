@@ -1,0 +1,40 @@
+<div>POST to https://sm-reports-bff-stage.smdemo.info/graphql</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;operationName&quot;: &quot;Assignments&quot;,
+    &quot;variables&quot;: {
+        &quot;subjectId&quot;: &quot;2&quot;,
+        &quot;userId&quot;: &quot;ffffffff62c3041317280f0030c45057&quot;,
+        &quot;orgId&quot;: &quot;8a72026581a3e1df0181c9c7d10400a1&quot;
+    },
+    &quot;query&quot;: &quot;query Assignments($subjectId: String!, $userId: String!, $orgId: String!) {\n  assignments(subjectId: $subjectId, userId: $userId, orgId: $orgId) {\n    assignmentId\n    assignmentAssignerFirstName\n    assignmentAssignerLastName\n    assignmentName\n    subjectId\n    assignmentType\n    __typename\n  }\n}\n&quot;
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: Bearer NjFYUJNPU9zc9UVv8JM4umKnXAO7UlHZPScze5vXZqDgUugsTuhLhRV4ClD9PcFU8pLduVwC5qqw3xUTotkFtXyYY0EMkKnvrOT7JKy7PXuoJuqlXHIxqWbjr8bdL3K9qkH9FE98SZEtNQxDl1mjo1zUAkdBfxQgvryXSWjtgsKYDIlFOj3VZtQBgENpt8gH8XMflxiLBIB657CF6XQqVXUO8psJMdjcFAJPHtOKK31nfblz37hAjrYnMwR6eU7</div>
+            <div>org-id: 8a72026581a3e1df0181c9c7d10400a1</div>
+            <div>Accept: */*</div>
+            <div>user-id: ffffffff62c3041317280f0030c45057</div>
+            <div>Content-Type: application/json</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;https://sm-reports-bff-stage.smdemo.info/graphql&#39; -H &#39;Authorization: Bearer NjFYUJNPU9zc9UVv8JM4umKnXAO7UlHZPScze5vXZqDgUugsTuhLhRV4ClD9PcFU8pLduVwC5qqw3xUTotkFtXyYY0EMkKnvrOT7JKy7PXuoJuqlXHIxqWbjr8bdL3K9qkH9FE98SZEtNQxDl1mjo1zUAkdBfxQgvryXSWjtgsKYDIlFOj3VZtQBgENpt8gH8XMflxiLBIB657CF6XQqVXUO8psJMdjcFAJPHtOKK31nfblz37hAjrYnMwR6eU7&#39; -H &#39;org-id: 8a72026581a3e1df0181c9c7d10400a1&#39; -H &#39;Accept: */*&#39; -H &#39;user-id: ffffffff62c3041317280f0030c45057&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;operationName&quot;: &quot;Assignments&quot;,
+    &quot;variables&quot;: {
+        &quot;subjectId&quot;: &quot;2&quot;,
+        &quot;userId&quot;: &quot;ffffffff62c3041317280f0030c45057&quot;,
+        &quot;orgId&quot;: &quot;8a72026581a3e1df0181c9c7d10400a1&quot;
+    },
+    &quot;query&quot;: &quot;query Assignments($subjectId: String!, $userId: String!, $orgId: String!) {\n  assignments(subjectId: $subjectId, userId: $userId, orgId: $orgId) {\n    assignmentId\n    assignmentAssignerFirstName\n    assignmentAssignerLastName\n    assignmentName\n    subjectId\n    assignmentType\n    __typename\n  }\n}\n&quot;
+}&#39;
+    </div>
+

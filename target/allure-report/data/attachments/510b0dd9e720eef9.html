@@ -1,0 +1,140 @@
+<div>POST to https://sm-reports-bff-stage.smdemo.info/graphql</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;operationName&quot;: &quot;GetAFGReportData&quot;,
+    &quot;variables&quot;: {
+        &quot;teacherId&quot;: &quot;ffffffff62c3041317280f0030c45057&quot;,
+        &quot;organizationId&quot;: &quot;8a72026581a3e1df0181c9c7d10400a1&quot;,
+        &quot;subject&quot;: 2,
+        &quot;datesAtRisk&quot;: 10400,
+        &quot;isGroupSelected&quot;: true,
+        &quot;studentIds&quot;: null,
+        &quot;groupIds&quot;: [
+            &quot;787bb240290f457cb3b5a6892cbf078a&quot;,
+            &quot;c9728f5ee2014cd9b61bd87ce61aec8a&quot;,
+            &quot;5f19ca24ccaf4961acfaf4e26ce95819&quot;,
+            &quot;1b12d846e3ba4106ac571561bb0cc5bb&quot;,
+            &quot;137f16bff0f149b3b05e3332c6087bdf&quot;,
+            &quot;0ca2e567cd2c4f7c8bdf9bf7fb7742c8&quot;,
+            &quot;a831384a8fec47068a8293599f74cbb2&quot;,
+            &quot;c20dac14715a4012ac1c44c0d9919596&quot;,
+            &quot;64477cb8850a483b8ebd031a016b0270&quot;,
+            &quot;8246e9c51d26450a9d28eb7798537b99&quot;,
+            &quot;614749d2d2fa45f486beeb56fa1fb070&quot;,
+            &quot;18b7f32cc13e4e48b1aae08ccde4b108&quot;,
+            &quot;3f314f764eda4a0ab283d881329cee3c&quot;,
+            &quot;4a066dc079cc4fd1831d357ca252d66b&quot;
+        ],
+        &quot;assignmentIds&quot;: [
+            &quot;196637&quot;,
+            &quot;187720&quot;,
+            &quot;199222&quot;,
+            &quot;218356&quot;,
+            &quot;190611&quot;,
+            &quot;194253&quot;,
+            &quot;196596&quot;,
+            &quot;194641&quot;,
+            &quot;187695&quot;,
+            &quot;187724&quot;,
+            &quot;190065&quot;,
+            &quot;187700&quot;,
+            &quot;187723&quot;,
+            &quot;188073&quot;,
+            &quot;218046&quot;,
+            &quot;186517&quot;,
+            &quot;186628&quot;,
+            &quot;187025&quot;,
+            &quot;202967&quot;,
+            &quot;205303&quot;,
+            &quot;215618&quot;,
+            &quot;187236&quot;,
+            &quot;196753&quot;,
+            &quot;194703&quot;,
+            &quot;188403&quot;,
+            &quot;187153&quot;,
+            &quot;190607&quot;
+        ],
+        &quot;orderBy&quot;: &quot;STRAND&quot;,
+        &quot;hierarchy&quot;: &quot;skills&quot;
+    },
+    &quot;query&quot;: &quot;query GetAFGReportData($organizationId: String!, $teacherId: String!, $isGroupSelected: Boolean, $studentIds: [String!], $subject: Float!, $groupIds: [String!], $assignmentIds: [String!], $orderBy: String, $datesAtRisk: Float, $hierarchy: String) {\n  getAFGReportData(\n    filterParams: {subject: $subject, isGroupSelected: $isGroupSelected, studentIds: $studentIds, groupIds: $groupIds, assignmentIds: $assignmentIds, orderBy: $orderBy, datesAtRisk: $datesAtRisk, hierarchy: $hierarchy}\n    userId: $teacherId\n    organizationId: $organizationId\n  ) {\n    reportRun\n    assignmentRow {\n      organizationName\n      teacherTitle\n      teacherFirstName\n      teacherLastName\n      teacherName\n      teacherUsername\n      teacherID\n      gradeDisplayOrder\n      assignmentTitle\n      assignmentID\n      strandSkillRows {\n        strandName\n        strandLevel\n        catalogNum\n        objectiveID\n        loDescription\n        lessonNumber\n        lessonTitle\n        targetedLessonLink\n        studentRows {\n          username\n          studentName\n          studentFirstName\n          studentLastName\n          studentId\n          personID\n          failedDate\n          grade\n          group {\n            groupId\n            groupName\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n&quot;
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: Bearer NjFYUJNPU9zc9UVv8JM4umKnXAO7UlHZPScze5vXZqDgUugsTuhLhRV4ClD9PcFU8pLduVwC5qqw3xUTotkFtXyYY0EMkKnvrOT7JKy7PXuoJuqlXHIxqWbjr8bdL3K9qkH9FE98SZEtNQxDl1mjo1zUAkdBfxQgvryXSWjtgsKYDIlFOj3VZtQBgENpt8gH8XMflxiLBIB657CF6XQqVXUO8psJMdjcFAJPHtOKK31nfblz37hAjrYnMwR6eU7</div>
+            <div>org-id: 8a72026581a3e1df0181c9c7d10400a1</div>
+            <div>Accept: */*</div>
+            <div>user-id: ffffffff62c3041317280f0030c45057</div>
+            <div>Content-Type: application/json</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;https://sm-reports-bff-stage.smdemo.info/graphql&#39; -H &#39;Authorization: Bearer NjFYUJNPU9zc9UVv8JM4umKnXAO7UlHZPScze5vXZqDgUugsTuhLhRV4ClD9PcFU8pLduVwC5qqw3xUTotkFtXyYY0EMkKnvrOT7JKy7PXuoJuqlXHIxqWbjr8bdL3K9qkH9FE98SZEtNQxDl1mjo1zUAkdBfxQgvryXSWjtgsKYDIlFOj3VZtQBgENpt8gH8XMflxiLBIB657CF6XQqVXUO8psJMdjcFAJPHtOKK31nfblz37hAjrYnMwR6eU7&#39; -H &#39;org-id: 8a72026581a3e1df0181c9c7d10400a1&#39; -H &#39;Accept: */*&#39; -H &#39;user-id: ffffffff62c3041317280f0030c45057&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;operationName&quot;: &quot;GetAFGReportData&quot;,
+    &quot;variables&quot;: {
+        &quot;teacherId&quot;: &quot;ffffffff62c3041317280f0030c45057&quot;,
+        &quot;organizationId&quot;: &quot;8a72026581a3e1df0181c9c7d10400a1&quot;,
+        &quot;subject&quot;: 2,
+        &quot;datesAtRisk&quot;: 10400,
+        &quot;isGroupSelected&quot;: true,
+        &quot;studentIds&quot;: null,
+        &quot;groupIds&quot;: [
+            &quot;787bb240290f457cb3b5a6892cbf078a&quot;,
+            &quot;c9728f5ee2014cd9b61bd87ce61aec8a&quot;,
+            &quot;5f19ca24ccaf4961acfaf4e26ce95819&quot;,
+            &quot;1b12d846e3ba4106ac571561bb0cc5bb&quot;,
+            &quot;137f16bff0f149b3b05e3332c6087bdf&quot;,
+            &quot;0ca2e567cd2c4f7c8bdf9bf7fb7742c8&quot;,
+            &quot;a831384a8fec47068a8293599f74cbb2&quot;,
+            &quot;c20dac14715a4012ac1c44c0d9919596&quot;,
+            &quot;64477cb8850a483b8ebd031a016b0270&quot;,
+            &quot;8246e9c51d26450a9d28eb7798537b99&quot;,
+            &quot;614749d2d2fa45f486beeb56fa1fb070&quot;,
+            &quot;18b7f32cc13e4e48b1aae08ccde4b108&quot;,
+            &quot;3f314f764eda4a0ab283d881329cee3c&quot;,
+            &quot;4a066dc079cc4fd1831d357ca252d66b&quot;
+        ],
+        &quot;assignmentIds&quot;: [
+            &quot;196637&quot;,
+            &quot;187720&quot;,
+            &quot;199222&quot;,
+            &quot;218356&quot;,
+            &quot;190611&quot;,
+            &quot;194253&quot;,
+            &quot;196596&quot;,
+            &quot;194641&quot;,
+            &quot;187695&quot;,
+            &quot;187724&quot;,
+            &quot;190065&quot;,
+            &quot;187700&quot;,
+            &quot;187723&quot;,
+            &quot;188073&quot;,
+            &quot;218046&quot;,
+            &quot;186517&quot;,
+            &quot;186628&quot;,
+            &quot;187025&quot;,
+            &quot;202967&quot;,
+            &quot;205303&quot;,
+            &quot;215618&quot;,
+            &quot;187236&quot;,
+            &quot;196753&quot;,
+            &quot;194703&quot;,
+            &quot;188403&quot;,
+            &quot;187153&quot;,
+            &quot;190607&quot;
+        ],
+        &quot;orderBy&quot;: &quot;STRAND&quot;,
+        &quot;hierarchy&quot;: &quot;skills&quot;
+    },
+    &quot;query&quot;: &quot;query GetAFGReportData($organizationId: String!, $teacherId: String!, $isGroupSelected: Boolean, $studentIds: [String!], $subject: Float!, $groupIds: [String!], $assignmentIds: [String!], $orderBy: String, $datesAtRisk: Float, $hierarchy: String) {\n  getAFGReportData(\n    filterParams: {subject: $subject, isGroupSelected: $isGroupSelected, studentIds: $studentIds, groupIds: $groupIds, assignmentIds: $assignmentIds, orderBy: $orderBy, datesAtRisk: $datesAtRisk, hierarchy: $hierarchy}\n    userId: $teacherId\n    organizationId: $organizationId\n  ) {\n    reportRun\n    assignmentRow {\n      organizationName\n      teacherTitle\n      teacherFirstName\n      teacherLastName\n      teacherName\n      teacherUsername\n      teacherID\n      gradeDisplayOrder\n      assignmentTitle\n      assignmentID\n      strandSkillRows {\n        strandName\n        strandLevel\n        catalogNum\n        objectiveID\n        loDescription\n        lessonNumber\n        lessonTitle\n        targetedLessonLink\n        studentRows {\n          username\n          studentName\n          studentFirstName\n          studentLastName\n          studentId\n          personID\n          failedDate\n          grade\n          group {\n            groupId\n            groupName\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n&quot;
+}&#39;
+    </div>
+
