@@ -1,24 +1,16 @@
 package apiTest;
-
 import static io.restassured.RestAssured.*;
 import java.util.List;
 import java.util.Map;
 import org.testng.annotations.Test;
 import constants.Assignments;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import utils.ConfigManager;
 import utils.TestBase;
 
 public class AssignmentsDetailTest extends TestBase {
 
-        @Test
-        @Story("Get assigned assignments")
-        @Severity(SeverityLevel.CRITICAL)
-        @Description("Verify assigned assignments API returns 200")
+        @Test(groups = {"smoke"})
         public void testMasteryPerformanceDetails() {
                 Response resp = given().spec(reportsRequest())
                                 .body(Assignments.assignmentsParameterized(

@@ -8,7 +8,7 @@ import utils.TestBase;
 
 public class GetOrgStudentTest extends TestBase {
 
-     @Test
+     @Test(groups = {"smoke"})
     public void GetAllOrgStudent() {
 
         Response resp = RestAssured

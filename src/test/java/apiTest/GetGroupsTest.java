@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 import utils.TestBase;
 
 public class GetGroupsTest extends TestBase {
-        @Test
+        @Test(groups = {"smoke"})
         public void getAllGroups() {
 
                 Response resp = RestAssured

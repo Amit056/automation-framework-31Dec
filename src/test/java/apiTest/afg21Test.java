@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.*;
 
  public class afg21Test extends TestBase{
 
-    @Test
+    @Test(groups = {"smoke"})
     public void testGetAfgReport() {
 
         Response resp = given().spec(reportsRequest())

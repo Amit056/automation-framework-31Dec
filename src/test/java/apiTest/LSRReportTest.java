@@ -102,7 +102,7 @@ public class LSRReportTest extends TestBase {
         String lastDate = "2025-12-28T05:08:17.000Z";
         boolean prevLevel = false;
 
-        @Test
+        @Test(groups = {"smoke"})
         public void testGetLsrReport() {
                
 

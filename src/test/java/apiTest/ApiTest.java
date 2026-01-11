@@ -34,7 +34,7 @@ public class ApiTest extends TestBase {
                 System.out.println("id: " + id + ", title: " + title + ", price: " + price);
         }
 
-        @Test
+        @Test(groups = {"smoke"})
         public void method2_UsingJsonPath() {
                 Response response = given()
                                 .pathParam("id", 1)
