@@ -59,6 +59,9 @@ jobs:
       # 🔥 Run selected test suite
       - name: Run API Tests
         run: |
+          echo "Environment  : ${{ github.event.inputs.env }}"
+          echo "Test Suite   : ${{ github.event.inputs.suite }}"
+
           if [ "${{ github.event.inputs.suite }}" = "full" ]; then
             mvn clean test -Denv=${{ github.event.inputs.env }}
           else
@@ -72,6 +75,11 @@ jobs:
       - name: Deploy Allure Report to GitHub Pages
         if: always()
         run: |
+          if [ ! -d "target/site/allure-maven-plugin" ]; then
+            echo "❌ Allure report not found"
+            exit 1
+          fi
+
           mkdir -p /tmp/allure-report
           cp -r target/site/allure-maven-plugin/* /tmp/allure-report/
 
@@ -92,5 +100,11 @@ jobs:
           git config user.email "github-actions@github.com"
 
           git add .
-          git commit -m "Publish Allure report"
-          git push origin gh-pages
+
+          # 🔥 Avoid empty commit crash
+          if git diff --cached --quiet; then
+            echo "No changes in Allure report"
+          else
+            git commit -m "Publish Allure report"
+            git push origin gh-pages
+          fi
